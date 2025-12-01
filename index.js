@@ -17,7 +17,7 @@ const AUTO_ACCESS = process.env.AUTO_ACCESS || false;      // 是否开启自动
 const WSPATH = process.env.WSPATH || UUID.slice(0, 8);     // 节点路径，默认获取uuid前8位
 const SUB_PATH = process.env.SUB_PATH || 'a43fce85-e811-42bd-bd97-f7e3bb026ea8';            // 获取节点的订阅路径
 const NAME = process.env.NAME || 'Hugface';                       // 节点名称
-const PORT = process.env.PORT || 3000;                     // http和ws服务端口
+const PORT = process.env.PORT || 6230;                     // http和ws服务端口
 
 let ISP = '';
 const GetISP = async () => {
