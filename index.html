@@ -1,318 +1,272 @@
-
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>守护地球家园 - 环境保护倡议</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>My Personal Navigator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+        :root {
+            --primary-color: #4f46e5;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
-        .card-hover {
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Header & Search */
+        header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto 0;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 25px 15px 50px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: var(--shadow);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        /* Grid System */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        /* Link Cards */
+        .link-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            text-align: center;
         }
-        .card-hover:hover {
+
+        .link-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
         }
-        .progress-bar {
-            transition: width 2s ease-in-out;
+
+        .link-card i {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--primary-color);
         }
-        .fade-in {
-            animation: fadeIn 1s ease-in;
+
+        .link-card span {
+            font-weight: 500;
+            font-size: 0.95rem;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .link-card small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .link-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- 导航栏 -->
-    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-leaf text-2xl"></i>
-                    <h1 class="text-xl font-bold">守护地球家园</h1>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="hover:text-green-200 transition-colors">首页</a>
-                    <a href="#issues" class="hover:text-green-200 transition-colors">环境问题</a>
-                    <a href="#solutions" class="hover:text-green-200 transition-colors">解决方案</a>
-                    <a href="#pledge" class="hover:text-green-200 transition-colors">环保承诺</a>
-                </div>
-                <button class="md:hidden">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!-- 英雄区域 -->
-    <section id="home" class="gradient-bg text-white py-20">
-        <div class="container mx-auto px-4 text-center fade-in">
-            <h2 class="text-5xl font-bold mb-6">保护环境，从我做起</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">地球是我们共同的家园，每一份环保行动都在为未来播种希望</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button class="bg-white text-green-700 px-8 py-3 rounded-full font-semibold hover:bg-green-50 transition-colors">
-                    <i class="fas fa-seedling mr-2"></i>立即行动
-                </button>
-                <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-green-700 transition-colors">
-                    <i class="fas fa-info-circle mr-2"></i>了解更多
-                </button>
-            </div>
+    <header>
+        <h1>Web Navigator</h1>
+        <p>Your curated collection of daily tools and resources</p>
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search for bookmarks..." onkeyup="filterLinks()">
         </div>
-    </section>
+    </header>
 
-    <!-- 环境问题展示 -->
-    <section id="issues" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">我们面临的环境挑战</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-red-50 rounded-xl p-6 card-hover">
-                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-industry text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-red-700 mb-3">空气污染</h3>
-                    <p class="text-gray-600">工业排放、汽车尾气导致空气质量下降，影响人类健康</p>
-                </div>
-                <div class="bg-blue-50 rounded-xl p-6 card-hover">
-                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-tint text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-3">水资源短缺</h3>
-                    <p class="text-gray-600">全球水资源分布不均，部分地区面临严重缺水问题</p>
-                </div>
-                <div class="bg-yellow-50 rounded-xl p-6 card-hover">
-                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-tree text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-yellow-700 mb-3">森林砍伐</h3>
-                    <p class="text-gray-600">每年数百万公顷森林消失，生物多样性受到威胁</p>
-                </div>
+    <div class="container">
+        
+        <!-- Section 1: Productivity -->
+        <section class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-briefcase"></i> Productivity</h2>
+            <div class="link-grid">
+                <a href="https://github.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub</span>
+                    <small>Code hosting</small>
+                </a>
+                <a href="https://notion.so" class="link-card" target="_blank">
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <span>Notion</span>
+                    <small>Workspace</small>
+                </a>
+                <a href="https://trello.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-trello"></i>
+                    <span>Trello</span>
+                    <small>Task Management</small>
+                </a>
+                <a href="https://canva.com" class="link-card" target="_blank">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>Canva</span>
+                    <small>Design Tools</small>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 环保行动统计 -->
-    <section class="py-16 bg-green-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">环保行动成果</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-green-600 mb-2" id="treesCount">0</div>
-                    <p class="text-gray-600">树木种植</p>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-green-600 mb-2" id="plasticCount">0</div>
-                    <p class="text-gray-600">减少塑料使用(kg)</p>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-green-600 mb-2" id="energyCount">0</div>
-                    <p class="text-gray-600">节约能源(kWh)</p>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-green-600 mb-2" id="waterCount">0</div>
-                    <p class="text-gray-600">节约用水(吨)</p>
-                </div>
+        <!-- Section 2: Social & Entertainment -->
+        <section class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-share-nodes"></i> Social & Media</h2>
+            <div class="link-grid">
+                <a href="https://youtube.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YouTube</span>
+                    <small>Video Sharing</small>
+                </a>
+                <a href="https://twitter.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span>X / Twitter</span>
+                    <small>Social News</small>
+                </a>
+                <a href="https://reddit.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-reddit"></i>
+                    <span>Reddit</span>
+                    <small>Community</small>
+                </a>
+                <a href="https://medium.com" class="link-card" target="_blank">
+                    <i class="fa-brands fa-medium"></i>
+                    <span>Medium</span>
+                    <small>Reading</small>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 解决方案 -->
-    <section id="solutions" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">我们可以做的改变</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-gray-50 rounded-xl p-6 mb-6 card-hover">
-                    <div class="flex items-start">
-                        <i class="fas fa-recycle text-green-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">垃圾分类回收</h3>
-                        <p class="text-gray-600">正确分类垃圾，提高资源回收利用率，减少填埋场负担</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 mb-6 card-hover">
-                    <div class="flex items-start">
-                        <i class="fas fa-bicycle text-green-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">绿色出行</h3>
-                        <p class="text-gray-600">多使用公共交通、骑行或步行，减少汽车尾气排放</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 card-hover">
-                    <div class="flex items-start">
-                        <i class="fas fa-solar-panel text-green-500 text-2xl mt-1 mr-4"></i>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">使用可再生能源</h3>
-                        <p class="text-gray-600">推广太阳能、风能等清洁能源，减少化石燃料依赖</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Section 3: AI Tools -->
+        <section class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-robot"></i> AI Resources</h2>
+            <div class="link-grid">
+                <a href="https://chatgpt.com" class="link-card" target="_blank">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>ChatGPT</span>
+                    <small>OpenAI</small>
+                </a>
+                <a href="https://claude.ai" class="link-card" target="_blank">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Claude AI</span>
+                    <small>Anthropic</small>
+                </a>
+                <a href="https://midjourney.com" class="link-card" target="_blank">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Midjourney</span>
+                    <small>AI Art</small>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 环保承诺区域 -->
-    <section id="pledge" class="py-16 gradient-bg text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-6">加入环保承诺</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">让我们一起承诺，为保护地球环境贡献自己的力量</p>
-            
-            <div class="max-w-md mx-auto bg-white rounded-xl p-6 text-gray-800 mb-8">
-                <h3 class="text-xl font-semibold mb-4">我的环保承诺书</h3>
-                <div class="space-y-3 text-left">
-                    <label class="flex items-center">
-                        <input type="checkbox" class="mr-3 rounded text-green-500 focus:ring-green-500">
-                        <span>我承诺减少一次性塑料制品的使用</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="checkbox" class="mr-3 rounded text-green-500 focus:ring-green-500">
-                        <span>我承诺节约用水用电</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="checkbox" class="mr-3 rounded text-green-500 focus:ring-green-500">
-                        <span>我承诺做好垃圾分类</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="checkbox" class="mr-3 rounded text-green-500 focus:ring-green-500">
-                        <span>我承诺积极参与植树活动</span>
-                    </label>
-                </div>
-                <button id="pledgeBtn" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold mt-6 hover:bg-green-600 transition-colors">
-                    签署承诺书
-                </button>
-            </div>
+    </div>
 
-            <div class="max-w-2xl mx-auto bg-green-800 bg-opacity-30 rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-4">环保行动日历</h3>
-                <div class="grid grid-cols-7 gap-2 text-sm">
-                    <div class="text-center py-2">日</div>
-                    <div class="text-center py-2">一</div>
-                    <div class="text-center py-2">二</div>
-                    <div class="text-center py-2">三</div>
-                    <div class="text-center py-2">四</div>
-                    <div class="text-center py-2">五</div>
-                    <div class="text-center py-2">六</div>
-                    <!-- 日历日期将通过JavaScript动态生成 -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-leaf text-2xl text-green-400"></i>
-                        <span class="text-xl font-bold">守护地球家园</span>
-                    </div>
-                    <p class="text-gray-400 mt-2">让我们一起行动，为子孙后代留下绿水青山</p>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-weibo text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-weixin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
-                <p>© 2025 环境保护倡议组织. 共同守护我们的地球家园</p>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2023 My Navigation Page. Created with <i class="fa-solid fa-heart" style="color: #e11d48;"></i></p>
     </footer>
 
     <script>
-        // 数字动画效果
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                obj.innerHTML = value.toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
+        // Simple search filter function
+        function filterLinks() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('link-card');
 
-        // 页面加载后执行动画
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初始化统计数据
-            animateValue('treesCount', 0, 12500, 2000);
-            animateValue('plasticCount', 0, 8500, 2000);
-            animateValue('energyCount', 0, 42000, 2000);
-            animateValue('waterCount', 0, 15600, 2000);
-
-            // 承诺书按钮交互
-            document.getElementById('pledgeBtn').addEventListener('click', function() {
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                let checkedCount = 0;
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) checkedCount++;
-                });
-
-                if (checkedCount > 0) {
-                    alert(`感谢您的承诺！您已选择${checkedCount}项环保行动。让我们共同努力保护环境！`);
-                    // 保存到localStorage
-                    localStorage.setItem('environmentPledge', new Date().toISOString());
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName('span')[0].innerText;
+                const description = cards[i].getElementsByTagName('small')[0].innerText;
+                
+                if (title.toLowerCase().indexOf(filter) > -1 || 
+                    description.toLowerCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
                 } else {
-                    alert('请至少选择一项环保承诺');
+                    cards[i].style.display = "none";
                 }
-            });
-
-            // 平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // 响应式导航菜单
-            document.querySelector('button.md\\:hidden').addEventListener('click', function() {
-                const nav = document.querySelector('.hidden.md\\:flex');
-                nav.classList.toggle('hidden');
-                nav.classList.toggle('flex');
-                nav.classList.toggle('flex-col');
-                nav.classList.toggle('absolute');
-                nav.classList.toggle('top-16');
-                nav.classList.toggle('right-4');
-                nav.classList.toggle('bg-green-600');
-                nav.classList.toggle('p-4');
-                nav.classList.toggle('rounded-lg');
-            });
-        });
+            }
+        }
     </script>
 </body>
 </html>
-<code_end>
-该单页HTML应用具有以下功能特点：
-- 采用现代化响应式设计，适配各种设备屏幕尺寸
-- 包含环境问题展示、解决方案建议、环保行动统计等核心模块
-- 实现环保承诺书签署功能，支持localStorage数据持久化
-- 集成数字动画效果和平滑滚动交互
-- 使用绿色环保主题配色方案，视觉效果统一协调
-- 提供完整的用户交互体验，包括悬浮效果和过渡动画
-- 页面结构清晰，包含导航栏、内容区域和页脚信息
-- 代码模块化组织，注释完整，便于维护和扩展
