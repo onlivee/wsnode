@@ -1,7 +1,7 @@
 {
-  "name": "ifnode",
+  "name": "environ",
   "version": "1.0.0",
-  "description": "Nodejsinfce",
+  "description": "Nodeem",
   "main": "index.js",
   "private": false,
   "scripts": {
