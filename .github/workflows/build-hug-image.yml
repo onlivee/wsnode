@@ -5,9 +5,9 @@ on:
     branches: [ hug ]
     paths:
       - 'Dockerfile'
-      - 'index.js'
+      - 'nav.js'
       - 'package.json'
-      - 'index.html'
+      - 'nav.html'
   pull_request:
     branches: [ hug ]
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/havfun:lastest
+            ghcr.io/${{ github.repository_owner }}/sliwon:lastest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=http server
