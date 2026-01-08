@@ -2,10 +2,10 @@
   "name": "environ",
   "version": "1.0.0",
   "description": "Nodeem",
-  "main": "index.js",
+  "main": "nav.js",
   "private": false,
   "scripts": {
-    "start": "node index.js"
+    "start": "node nav.js"
   },
   "dependencies": {
     "ws": "^8.14.2",
