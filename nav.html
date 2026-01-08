@@ -3,234 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Bureau of Absolute Nothingness</title>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <title>Nexus | Personal Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --paper: #f4f1ea;
-            --ink: #2b2b2b;
-            --stamp-red: #b22222;
-            --office-blue: #0047ab;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
         body {
-            background-color: #d1d1d1;
-            font-family: 'Courier Prime', monospace;
-            color: var(--ink);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            padding: 50px 20px;
-            transition: all 0.1s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #020617;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0, transparent 50%);
+            min-height: 100vh;
+            color: #f1f5f9;
         }
 
-        /* Stealth Mode Style (Fake Excel) */
-        body.stealth-mode {
-            background: white;
-            font-family: sans-serif;
-            padding: 0;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        #document-page {
-            background-color: var(--paper);
-            width: 100%;
-            max-width: 800px;
-            padding: 60px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
-            position: relative;
-            border: 1px solid #ccc;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
         }
 
-        .stealth-mode #document-page {
-            max-width: 100%;
-            box-shadow: none;
-            border: none;
-            padding: 0;
+        .search-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
         }
 
-        header {
-            border-bottom: 2px solid var(--ink);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            text-align: center;
+        .search-box:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.07);
+            border-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
         }
 
-        .stamp {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            border: 4px double var(--stamp-red);
-            color: var(--stamp-red);
-            padding: 10px;
-            transform: rotate(15deg);
-            font-weight: bold;
+        .category-header {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            opacity: 0.8;
-            pointer-events: none;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
         }
 
-        h1 { margin: 0; font-size: 2rem; }
-        .subtitle { font-style: italic; font-size: 0.9rem; margin-top: 5px; }
-
-        section { margin-bottom: 40px; }
-
-        .interactive-box {
-            border: 1px dashed var(--ink);
-            padding: 20px;
-            margin-top: 15px;
+        .category-header::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(to right, rgba(100, 116, 139, 0.3), transparent);
+            margin-left: 1rem;
         }
 
-        button {
-            background: var(--ink);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Courier Prime', monospace;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        button:hover { background: var(--office-blue); }
-
-        #title-result {
-            margin-top: 15px;
-            font-weight: bold;
-            color: var(--office-blue);
-        }
-
-        /* Fake Excel Spreadsheet for Stealth Mode */
-        #excel-grid {
-            display: none;
-            width: 100vw;
-            height: 100vh;
-            border-collapse: collapse;
-        }
-
-        .stealth-mode #excel-grid { display: table; }
-        .stealth-mode #content-wrapper { display: none; }
-
-        #excel-grid td {
-            border: 1px solid #d4d4d4;
-            padding: 5px;
-            font-size: 12px;
-            color: #333;
-        }
-
-        .compliance-bar {
-            height: 20px;
-            width: 0%;
-            background: var(--stamp-red);
-            margin-top: 10px;
-            transition: width 0.5s;
-        }
-
-        .footer {
-            margin-top: 50px;
-            font-size: 0.7rem;
-            text-align: center;
-            color: #777;
-        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <!-- Excel View (Stealth Mode) -->
-    <table id="excel-grid">
-        <tr><td style="background: #e6e6e6; width: 30px;"></td><td>A</td><td>B</td><td>C</td><td>D</td></tr>
-        <tr><td style="background: #e6e6e6;">1</td><td>Q3 Financial Growth</td><td>Forecast</td><td>Retention</td><td>=SUM(B2:B99)</td></tr>
-        <tr><td style="background: #e6e6e6;">2</td><td>$42,000.00</td><td>0.12%</td><td>High</td><td>Calculated</td></tr>
-        <tr><td style="background: #e6e6e6;">3</td><td>$11,500.00</td><td>0.05%</td><td>Med</td><td>Pending</td></tr>
-    </table>
-
-    <div id="document-page">
-        <div id="content-wrapper">
-            <div class="stamp">Approved for<br>Procrastination</div>
-
-            <header>
-                <h1>THE BUREAU OF ABSOLUTE NOTHINGNESS</h1>
-                <p class="subtitle">"Where efficiency comes to take a long, unpaid nap."</p>
-            </header>
-
-            <section>
-                <h3>1. IDENTITY VERIFICATION</h3>
-                <p>To proceed with doing nothing, please generate your official bureaucratic title.</p>
-                <div class="interactive-box">
-                    <input type="text" id="user-name" placeholder="Enter name..." style="padding: 8px;">
-                    <button onclick="generateTitle()">GET TITLE</button>
-                    <div id="title-result"></div>
-                </div>
-            </section>
-
-            <section>
-                <h3>2. COMPLIANCE DEPARTMENT</h3>
-                <p>Click the button to demonstrate your willingness to follow arbitrary instructions.</p>
-                <div class="interactive-box">
-                    <button onclick="increaseCompliance()">SUBMIT OBEDIENCE</button>
-                    <div class="compliance-bar" id="comp-bar"></div>
-                    <p id="comp-text" style="font-size: 0.8rem;">Compliance Level: 0%</p>
-                </div>
-            </section>
-
-            <section>
-                <h3>3. EMERGENCY PROTOCOL</h3>
-                <p>Is your boss walking by? Use the button below to activate <strong>Stealth Mode (Excel Simulation)</strong>. Press <strong>'ESC'</strong> to return to reality.</p>
-                <button onclick="toggleStealth()" style="background: var(--stamp-red);">PANIC BUTTON</button>
-            </section>
-
-            <div class="footer">
-                FORM NO. 00-VOID-999<br>
-                BY READING THIS, YOU AGREE TO WASTING AT LEAST 2 MINUTES OF TAXPAYER TIME.
+    <div class="max-w-7xl mx-auto px-8">
+        
+        <!-- Header & Search -->
+        <header class="pt-24 pb-20 text-center">
+            <h1 class="text-5xl font-extrabold mb-12 tracking-tight">
+                <span class="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">NEXUS</span>
+            </h1>
+            
+            <div class="relative max-w-2xl mx-auto">
+                <form action="https://www.google.com/search" method="get" target="_blank">
+                    <input type="text" name="q" placeholder="Search the web or enter URL..." 
+                           class="search-box w-full py-5 px-10 rounded-full text-lg shadow-inner">
+                    <button type="submit" class="absolute right-6 top-5 text-gray-500 hover:text-white transition-colors">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
             </div>
-        </div>
+        </header>
+
+        <!-- Navigation Grid -->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-16">
+
+            <!-- Section: Essentials -->
+            <section>
+                <h2 class="category-header">Essentials</h2>
+                <div class="space-y-4">
+                    <a href="https://github.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-github text-2xl w-12 text-gray-400"></i>
+                        <div><p class="font-semibold text-sm">GitHub</p><p class="text-xs text-gray-500">Source Control</p></div>
+                    </a>
+                    <a href="https://chatgpt.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-bolt text-2xl w-12 text-emerald-400"></i>
+                        <div><p class="font-semibold text-sm">ChatGPT</p><p class="text-xs text-gray-500">AI Assistance</p></div>
+                    </a>
+                    <a href="https://gmail.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-envelope text-2xl w-12 text-red-400"></i>
+                        <div><p class="font-semibold text-sm">Gmail</p><p class="text-xs text-gray-500">Messaging</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Development -->
+            <section>
+                <h2 class="category-header">Development</h2>
+                <div class="space-y-4">
+                    <a href="https://stackoverflow.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-stack-overflow text-2xl w-12 text-orange-400"></i>
+                        <div><p class="font-semibold text-sm">Stack Overflow</p><p class="text-xs text-gray-500">Q&A Library</p></div>
+                    </a>
+                    <a href="https://vercel.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-terminal text-2xl w-12 text-blue-400"></i>
+                        <div><p class="font-semibold text-sm">Vercel</p><p class="text-xs text-gray-500">Cloud Platform</p></div>
+                    </a>
+                    <a href="https://aws.amazon.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-aws text-2xl w-12 text-yellow-500"></i>
+                        <div><p class="font-semibold text-sm">AWS Console</p><p class="text-xs text-gray-500">Cloud Infrastructure</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Design -->
+            <section>
+                <h2 class="category-header">Creative</h2>
+                <div class="space-y-4">
+                    <a href="https://figma.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-figma text-2xl w-12 text-purple-400"></i>
+                        <div><p class="font-semibold text-sm">Figma</p><p class="text-xs text-gray-500">Interface Design</p></div>
+                    </a>
+                    <a href="https://dribbble.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-dribbble text-2xl w-12 text-pink-400"></i>
+                        <div><p class="font-semibold text-sm">Dribbble</p><p class="text-xs text-gray-500">Design Inspiration</p></div>
+                    </a>
+                    <a href="https://unsplash.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-camera text-2xl w-12 text-cyan-400"></i>
+                        <div><p class="font-semibold text-sm">Unsplash</p><p class="text-xs text-gray-500">HD Assets</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Entertainment -->
+            <section>
+                <h2 class="category-header">Entertainment</h2>
+                <div class="space-y-4">
+                    <a href="https://youtube.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-youtube text-2xl w-12 text-red-500"></i>
+                        <div><p class="font-semibold text-sm">YouTube</p><p class="text-xs text-gray-500">Video Content</p></div>
+                    </a>
+                    <a href="https://netflix.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-film text-2xl w-12 text-red-600"></i>
+                        <div><p class="font-semibold text-sm">Netflix</p><p class="text-xs text-gray-500">Cinematic Stream</p></div>
+                    </a>
+                    <a href="https://spotify.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-spotify text-2xl w-12 text-green-500"></i>
+                        <div><p class="font-semibold text-sm">Spotify</p><p class="text-xs text-gray-500">Audio Library</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Cloud Storage -->
+            <section>
+                <h2 class="category-header">Storage</h2>
+                <div class="space-y-4">
+                    <a href="https://drive.google.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-google-drive text-2xl w-12 text-yellow-400"></i>
+                        <div><p class="font-semibold text-sm">G Drive</p><p class="text-xs text-gray-500">Cloud Sync</p></div>
+                    </a>
+                    <a href="https://dropbox.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-dropbox text-2xl w-12 text-blue-500"></i>
+                        <div><p class="font-semibold text-sm">Dropbox</p><p class="text-xs text-gray-500">File Hosting</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Gaming -->
+            <section>
+                <h2 class="category-header">Gaming</h2>
+                <div class="space-y-4">
+                    <a href="https://steampowered.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-steam text-2xl w-12 text-blue-300"></i>
+                        <div><p class="font-semibold text-sm">Steam</p><p class="text-xs text-gray-500">Storefront</p></div>
+                    </a>
+                    <a href="https://twitch.tv" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-twitch text-2xl w-12 text-purple-500"></i>
+                        <div><p class="font-semibold text-sm">Twitch</p><p class="text-xs text-gray-500">Live Streaming</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Knowledge -->
+            <section>
+                <h2 class="category-header">Library</h2>
+                <div class="space-y-4">
+                    <a href="https://wikipedia.org" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-university text-2xl w-12 text-slate-400"></i>
+                        <div><p class="font-semibold text-sm">Wikipedia</p><p class="text-xs text-gray-500">Encyclopedia</p></div>
+                    </a>
+                    <a href="https://medium.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-medium text-2xl w-12 text-white"></i>
+                        <div><p class="font-semibold text-sm">Medium</p><p class="text-xs text-gray-500">Quality Blogs</p></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Workspace -->
+            <section>
+                <h2 class="category-header">Work</h2>
+                <div class="space-y-4">
+                    <a href="https://notion.so" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fas fa-note-sticky text-2xl w-12 text-slate-300"></i>
+                        <div><p class="font-semibold text-sm">Notion</p><p class="text-xs text-gray-500">Connected Space</p></div>
+                    </a>
+                    <a href="https://slack.com" target="_blank" class="glass-card p-4 rounded-2xl flex items-center group">
+                        <i class="fab fa-slack text-2xl w-12 text-purple-300"></i>
+                        <div><p class="font-semibold text-sm">Slack</p><p class="text-xs text-gray-500">Communication</p></div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-40 pb-16 text-center">
+            <p class="text-gray-600 text-[10px] uppercase tracking-[0.4em] font-bold">
+                Copyright &copy; 2025 Nexus Hub &bull; All Rights Reserved
+            </p>
+        </footer>
     </div>
 
-    <script>
-        function generateTitle() {
-            const names = document.getElementById('user-name').value || "Anonymous Citizen";
-            const jobs = [
-                "Senior Executive of Paperclip Realignment",
-                "Director of Staring Out the Window",
-                "Chief Officer of Unnecessary CCing",
-                "Associate Consultant of Zoom Meeting Silence",
-                "Head of the Committee for Postponing Lunch",
-                "Junior Analyst of Infinite Scrolling"
-            ];
-            const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
-            document.getElementById('title-result').innerText = `Certified: ${names}, ${randomJob}`;
-        }
-
-        let compliance = 0;
-        function increaseCompliance() {
-            if (compliance < 100) {
-                compliance += 10;
-                document.getElementById('comp-bar').style.width = compliance + "%";
-                document.getElementById('comp-text').innerText = "Compliance Level: " + compliance + "%";
-                if(compliance === 100) {
-                    alert("Congratulations. You are a perfect cog in the machine.");
-                }
-            } else {
-                alert("Maximum obedience reached. Please stop being so productive.");
-            }
-        }
-
-        function toggleStealth() {
-            document.body.classList.add('stealth-mode');
-        }
-
-        window.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") {
-                document.body.classList.remove('stealth-mode');
-            }
-        });
-
-        // Add some random "bureaucratic" jitter
-        setInterval(() => {
-            if (!document.body.classList.contains('stealth-mode')) {
-                const stamp = document.querySelector('.stamp');
-                stamp.style.transform = `rotate(${12 + Math.random() * 6}deg)`;
-            }
-        }, 2000);
-    </script>
 </body>
 </html>
