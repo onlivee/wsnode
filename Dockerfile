@@ -7,7 +7,7 @@ COPY nav.js nav.html package.json ./
 EXPOSE 7860
 
 RUN apk update && apk add --no-cache bash openssl curl &&\
-    chmod +x index.js &&\
+    chmod +x nav.js &&\
     npm install
 
 CMD ["node", "nav.js"]
